@@ -21,15 +21,25 @@
 # This session lasted for 1.9 hours, or roughly 1 hours and 54 minutes.
 #***************************************************************
 
-#prelim testing to make sure i understand integer division and modulus, remove later
-num1 = 1.92
-print(num1)
-num2 = num1 // 1
-num2 = int(num2)
-print(num2)
-num3 = (num1 % 1) * 60
-print("approximately {:.0f} minutes".format(num3))
+# Greeting and user input
+print("Hello! This program calculates a session length of a game after asking"
+      "for the play times of the beginning and end of a gaming session.")
+old_time = input("Please enter the total game run time at the start of the "
+               "session: ")
+old_time = float(old_time)
+new_time = input("Please enter the total game run time at the end of the "
+               "session: ")
+new_time = float(new_time)
 
+# The math part
+session_time_simple = (new_time - old_time)
+session_time_hrs = session_time_simple // 1         # truncate the decimal
+session_time_mins = (session_time_simple % 1) * 60  # truncate to the decimal
+
+# Output
+print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
+      "hours and {:.0f} minutes.".format(session_time_simple,
+                                         session_time_hrs, session_time_mins))
 
 #***************************************************************
 #                           Planning
