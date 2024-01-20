@@ -40,7 +40,7 @@ session_time_mins = (session_time_simple % 1) * 60  # truncate to the decimal
 print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
       "hours and {:.0f} minutes.".format(session_time_simple,
                                          session_time_hrs, session_time_mins))
-#the above is how pycharm wrapped this line
+#the above is how pycharm wrapped this line, idk
 
 #***************************************************************
 #                           Planning
