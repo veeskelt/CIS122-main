@@ -24,12 +24,12 @@
 # Greeting and user input
 print("Hello! This program calculates a session length of a game after asking"
       "for the play times of the beginning and end of a gaming session.")
-old_time = input("Please enter the total game run time at the start of the "
-               "session: ")
-old_time = float(old_time)
-new_time = input("Please enter the total game run time at the end of the "
-               "session: ")
-new_time = float(new_time)
+old_time = float(input("Please enter the total game run time at the start of "
+               "the session: "))
+#print(type(old_time))
+new_time = float(input("Please enter the total game run time at the end of the"
+               " session: "))
+#print(type(new_time))
 
 # The math part
 session_time_simple = (new_time - old_time)
@@ -40,6 +40,7 @@ session_time_mins = (session_time_simple % 1) * 60  # truncate to the decimal
 print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
       "hours and {:.0f} minutes.".format(session_time_simple,
                                          session_time_hrs, session_time_mins))
+#the above is how pycharm wrapped this line
 
 #***************************************************************
 #                           Planning
