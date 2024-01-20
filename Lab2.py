@@ -1,4 +1,4 @@
-#***************************************************************
+#*****************************************************************************
 # Author: Vega Skelton
 # Lab: Lab 2
 # Date: 1/16/2024
@@ -11,7 +11,7 @@
 #   session time in minutes
 # Sources: Lab 2 specifications and any other substantial
 # aids, like web pages
-#***************************************************************
+#*****************************************************************************
 #                          Sample Run
 # Hello! This program calculates a session length of a game after
 #   asking the play times of the beginning and end of a gaming
@@ -19,11 +19,17 @@
 # Please enter the game run time at the start of the session: 20.6
 # Please enter the run time at the end: 22.5
 # This session lasted for 1.9 hours, or roughly 1 hours and 54 minutes.
-#***************************************************************
+#*****************************************************************************
+# variable declaration
+old_time = 0.0
+new_time = 0.0
+session_time_simple = 0.0
+session_time_hrs = 0.0
+session_time_mins = 0.0
 
 # Greeting and user input
 print("Hello! This program calculates a session length of a game after asking"
-      "for the play times of the beginning and end of a gaming session.")
+      " for the play times of the beginning and end of a gaming session.")
 old_time = float(input("Please enter the total game run time at the start of "
                "the session: "))
 #print(type(old_time))
@@ -42,7 +48,7 @@ print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
                                          session_time_hrs, session_time_mins))
 #the above is how pycharm wrapped this line
 
-#***************************************************************
+#*****************************************************************************
 #                           Planning
 # Greeting
 # Prompt the user for starting session time (old_time)
@@ -53,10 +59,11 @@ print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
 # session_time_simple is just new_time - old time
 # session_time_hrs is session_time_simple // 1, to truncate the decimal
 # session_time_mins is (session_time_simple % 1) * 60, to isolate the playtime
-#   minutes. keeping session_time_mins as a float allows us to keep track of it
-#   for more precise math later, if needed. Also lets me use the format string
-#   function.
-# Output: This session's playtime is 1.9 hours, or approximately 1 hours and 54 minutes
-# can't use if/then/else statements to check for values of 0 or 1, so "1 hours"
-# gets to stay for now.
-#***************************************************************
+#   minutes. keeping session_time_mins as a float allows us to keep track of
+#   it for more precise math later, if needed. Also lets me use the format
+#   string function.
+# Output: This session's playtime is 1.9 hours, or approximately 1 hours and
+#           54 minutes
+# can't use if/then/else statements to check for values of 0 or 1, so
+# "1 hours" gets to stay for now.
+#*****************************************************************************
