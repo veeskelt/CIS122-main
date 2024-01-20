@@ -32,10 +32,8 @@ print("Hello! This program calculates a session length of a game after asking"
       " for the play times of the beginning and end of a gaming session.")
 old_time = float(input("Please enter the total game run time at the start of "
                "the session: "))
-#print(type(old_time))
 new_time = float(input("Please enter the total game run time at the end of the"
                " session: "))
-#print(type(new_time))
 
 # The math part
 session_time_simple = (new_time - old_time)
