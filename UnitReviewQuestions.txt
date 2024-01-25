@@ -16,13 +16,14 @@ Week 1
 	-Are empty lines ignored in python?
 		-Yes
 Week 2
-	-Why are right-most ** (expoential) operations performed first?
+	-Why are right-most ** (exponential) operations performed first?
 		They have to be for math to work right
 	-Why are there multiple ways to do some math operations?
 
 Week 3
-	-Why does python output function variables as tuples?
-		-It's simpler (easier on memory than lists) (also we don't know what tuples are yet so shhhhhh)
+	-Can python functions only handle 1 return variable?
+		-It can handle more, we just haven't covered that, and it's generally
+		 better to only return one variable.
 	-Why does main both need to exist and be called?
 		-Main exists to:
 		a) keep the file clean and readable
