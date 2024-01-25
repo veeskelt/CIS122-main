@@ -13,7 +13,8 @@
 # Goodbye!
 
 import math
-
+GUMBALL_VOLUME = 0.5236 # a gumball with a 1" diameter
+PERCENT_SOLID = 0.65    # the percent of the container that's filled
 
 def main():
     """
@@ -30,9 +31,9 @@ def main():
 def gumball_calc(dia, height):
     """
     Calculates the number of gumballs that can fit in a given cylinder
-    :param dia:
-    :param height:
-    :return: num_gumballs
+    :param dia: the diameter of the container
+    :param height: the height of the container
+    :return: num_gumballs, the number of gumballs that'll fit in the container.
     """
     gumball_volume = 0.5236  # gumball with 1" diameter
     percent_solid = .65  # percentage of cylinder that will contain solids
@@ -42,10 +43,10 @@ def gumball_calc(dia, height):
     # Calculate the volume of cylinder = πr^2h
     # Multiply cylinder volume by 65% to account for empty space
     # between gumballs
-    cylinder_volume = (math.pi * rad ** 2 * height) * percent_solid
+    cylinder_volume = (math.pi * rad ** 2 * height) * PERCENT_SOLID
     # Calculate the number of gumballs and then truncate the decimal
     # portion - we want the whole number of gumballs
-    num_gumballs = int(cylinder_volume / gumball_volume)
+    num_gumballs = int(cylinder_volume / GUMBALL_VOLUME)
     return num_gumballs
 
 
