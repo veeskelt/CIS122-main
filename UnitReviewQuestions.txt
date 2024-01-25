@@ -1,0 +1,33 @@
+# *****************************************************************************
+# Author: Vega Skelton
+# Lab: Unit Review Questions
+# Date: All term
+# Description: Each week, we are supposed to start the week off by asking 
+			   questions
+
+
+Week 1
+	-Why does the \n line break string function go inside the double quotes and
+     not outside them?
+		-it indicates that you want an empty line below it. And it won't work 
+		 outside the quotes.
+	-Is there a way to print something on the same line as the previous print command?
+		-Yes, but not with what we learned.
+	-Are empty lines ignored in python?
+		-Yes
+Week 2
+	-Why are right-most ** (expoential) operations performed first?
+		They have to be for math to work right
+	-Why are there multiple ways to do some math operations?
+
+Week 3
+	-Why does python output function variables as tuples?
+		-It's simpler (easier on memory than lists) (also we don't know what tuples are yet so shhhhhh)
+	-Why does main both need to exist and be called?
+		-Main exists to:
+		a) keep the file clean and readable
+		b) show examples of how code is used when the file is used as a module.
+		c) be ignored when the file's code is being used as a module
+	-What does sep=' ' mean at the end of the replit snippet in getting ready?
+		-sep is a way of telling python what character to put between separate
+		 segments of a print line.
