@@ -1,4 +1,5 @@
 # Author: Vega Skelton
+# Version: 2
 # Sample Run:
 
 # Gumball Estimator!
