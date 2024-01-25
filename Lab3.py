@@ -33,9 +33,11 @@ def main():
     greeting()
     old_time = get_old_time()
     new_time = get_new_time()
+
     session_time_full = abs(time_calc_full(old_time, new_time))
     session_time_hrs = abs(time_calc_hrs(session_time_full))
     session_time_mins = abs(time_calc_mins(session_time_full))
+
     output(session_time_full, session_time_hrs, session_time_mins)
     # the variables being assigned the output of the calc functions are
     # converted to the absolute values of the outputs to account for
