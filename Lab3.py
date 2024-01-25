@@ -1,6 +1,6 @@
 # *****************************************************************************
 # Author: Vega Skelton
-# Lab: Lab 2
+# Lab: Lab 3
 # Date: 1/24/2024
 # Description: Example: This program prompts the user for the
 #   playtime of a yet unspecified game before and after a session
