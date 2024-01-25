@@ -32,3 +32,4 @@ Week 3
 	-What does sep=' ' mean at the end of the replit snippet in getting ready?
 		-sep is a way of telling python what character to put between separate
 		 segments of a print line.
+
