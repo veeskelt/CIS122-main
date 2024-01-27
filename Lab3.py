@@ -9,7 +9,7 @@
 # Input: old play time, new play time
 # Output: simple session time, session time in hours,
 #   session time in minutes
-# Sources: Lab 2 specifications and any other substantial
+# Sources: Lab 3 specifications and any other substantial
 # aids, like web pages
 # *****************************************************************************
 #                          Sample Run
@@ -30,16 +30,21 @@ def main():
     minutes.
     :return: nothing
     """
+    old_time = 0.0
+    new_time = 0.0
+    session_time_full = 0.0
+    session_time_hrs = 0.0
+    session_time_mins = 0.0
+
     greeting()
     old_time = get_old_time()
     new_time = get_new_time()
-
     session_time_full = abs(time_calc_full(old_time, new_time))
     session_time_hrs = abs(time_calc_hrs(session_time_full))
     session_time_mins = abs(time_calc_mins(session_time_full))
 
     output(session_time_full, session_time_hrs, session_time_mins)
-    # the variables being assigned the output of the calc functions are
+    # The variables being assigned the output of the calc functions are
     # converted to the absolute values of the outputs to account for
     # the user entering the numbers in the wrong order, as I have
     # done many times while testing already.
@@ -51,43 +56,48 @@ def greeting():
     :return: nothing
     """
     print("Hello! This program calculates a session length of a game after "
-          "asking for the play times of the beginning and end of a gaming "
-          "session.")
+          "\nasking for the play times of the beginning and end of a gaming "
+          "\nsession.")
 
 
 def get_old_time():
     """
     This function gets the old time from the user
-    :return: old, short for old time. shortened so it doesn't get confused
+    :return: old, short for old time. Shortened so it doesn't get confused
     with main's old_time variable.
     """
-    old = float(input("Please enter the total game run time at the start "
-                      "of the session: "))
+    old = 0.0
+    old = float(input("Please enter the total game run time "
+                      "\nat the start of the session (in decimal"
+                      "form): "))
     return old
 
 
 def get_new_time():
     """
     This function gets the new time from the user
-    :return: new, short for new time. shortened so it doesn't get confused
+    :return: new, short for new time. Shortened so it doesn't get confused
     with main's new_time variable.
     """
-    new = float(input("Please enter the total game run time at the end of"
-                      " the session: "))
+    new = 0.0
+    new = float(input("Please enter the total game run time "
+                      "\nat the end of the session (in decimal"
+                      "form): "))
     return new
 
 
 def time_calc_full(old_time, new_time):
     """
     Calculates the true session time
-    :param old_time: one of two times the program works with. should be, but
+    :param old_time: One of two times the program works with. should be, but
     doesn't have to be, the lower of the two times. This value should be
     obtained from the user or a file.
-    :param new_time: one of two times the program works with. should be, but
+    :param new_time: One of two times the program works with. should be, but
     doesn't have to be, the higher of the two times. This value should be
     obtained from the user or a file.
     :return: sesh_full, short for session_full.
     """
+    sesh_full = 0.0
     sesh_full = (new_time - old_time)
     return sesh_full
 
@@ -99,27 +109,29 @@ def time_calc_hrs(session_time_full):
     time_calc_full(). Should be a float.
     :return: sesh_hrs, short for session_hours
     """
-    sesh_hrs = session_time_full // 1  # truncate the decimal
+    sesh_hrs = 0.0
+    sesh_hrs = session_time_full // 1  # Truncates the decimal
     return sesh_hrs
 
 
 def time_calc_mins(session_time_full):
     """
     Calculates the session time in minutes
-    :param session_time_full: the variable that was assigned to the result of
+    :param session_time_full: The variable that was assigned to the result of
     time_calc_full(). Should be a float.
     :return: sesh_mins, short for session_minutes.
     """
-    sesh_mins = (session_time_full % 1) * 60  # truncate to decimal
+    sesh_mins = 0.0
+    sesh_mins = (session_time_full % 1) * 60  # Truncates to decimal
     return sesh_mins
 
 
 def output(session_time_full, session_time_hrs, session_time_mins):
     """
     Outputs the results to the user
-    :param session_time_full: the result of time_calc_full()
-    :param session_time_hrs:  the result of time_calc_hrs()
-    :param session_time_mins: the result of time_calc_mins()
+    :param session_time_full: The result of time_calc_full()
+    :param session_time_hrs: The result of time_calc_hrs()
+    :param session_time_mins: The result of time_calc_mins()
     :return: nothing
     """
     print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
