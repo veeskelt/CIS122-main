@@ -117,9 +117,9 @@ def time_calc_mins(session_time_full):
 def output(session_time_full, session_time_hrs, session_time_mins):
     """
     Outputs the results to the user
-    :param session_time_full:
-    :param session_time_hrs:
-    :param session_time_mins:
+    :param session_time_full: the result of time_calc_full()
+    :param session_time_hrs:  the result of time_calc_hrs()
+    :param session_time_mins: the result of time_calc_mins()
     :return: nothing
     """
     print("This session's playtime is {:.1f} hours, or approximately {:.0f} "
