@@ -209,4 +209,3 @@ def print_pennies(usr_change_pennies):
 
 if __name__ == "__main__":
     main()
-
