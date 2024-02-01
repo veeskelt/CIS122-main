@@ -33,3 +33,13 @@ Week 3
 		-sep is a way of telling python what character to put between separate
 		 segments of a print line.
 
+Week 4
+	-Why does elif exist if it's just a shortened else-if statement?
+		-Brevity and ease of writing code
+	-Why are we not learning about input sanitization yet?
+		-fuck you that's why
+	-Why are variables initialized at the beginning of a function if Python
+	 works just fine if they're not?
+		-It's good practice, as other languages do not work like this. It also 
+		 allows for better debugging as you do not have to worry about the
+		 type getting misintepreted somewhere due to sloppy code or user error.
