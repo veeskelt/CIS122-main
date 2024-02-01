@@ -1,0 +1,154 @@
+# *****************************************************************************
+# Author: Vega Skelton
+# Lab: Lab 4
+# Date: 2/1/2024
+# Description: Example: This program prompts the user for the
+#   playtime of a yet unspecified game before and after a session
+#   after a session and output the session time in hours and
+#   minutes (rounded).
+# Input: old play time, new play time
+# Output: simple session time, session time in hours,
+#   session time in minutes
+# Sources: Lab 3 specifications and any other substantial
+# aids, like web pages
+# *****************************************************************************
+#                          Sample Run
+# Hello! This program calculates a session length of a game after
+#   asking the play times of the beginning and end of a gaming
+#   session.
+# Please enter the game run time at the start of the session: 20.6
+# Please enter the run time at the end: 22.5
+# This session lasted for 1.9 hours, or roughly 1 hours and 54 minutes.
+# *****************************************************************************
+
+
+def main():
+    """
+    This program calculates the session length of a given thing given the
+    total run time before the session and the run time after the session,
+    and outputs the session time in decimal hours, integer hours, and integer
+    minutes.
+    :return: nothing
+    """
+    old_time = 0.0
+    new_time = 0.0
+    session_time_full = 0.0
+    session_time_hrs = 0.0
+    session_time_mins = 0.0
+
+    greeting()
+    old_time = get_old_time()
+    new_time = get_new_time()
+    session_time_full = abs(time_calc_full(old_time, new_time))
+    session_time_hrs = abs(time_calc_hrs(session_time_full))
+    session_time_mins = abs(time_calc_mins(session_time_full))
+
+    output(session_time_full, session_time_hrs, session_time_mins)
+    # The variables being assigned the output of the calc functions are
+    # converted to the absolute values of the outputs to account for
+    # the user entering the numbers in the wrong order, as I have
+    # done many times while testing already.
+
+
+def greeting():
+    """
+    This function displays a greeting
+    :return: nothing
+    """
+    print("Hello! This program calculates a session length of a program after"
+          " asking for \n the run times of program at the the beginning and "
+          "end of a session.")
+
+
+def get_old_time():
+    """
+    This function gets the old time from the user
+    :return: old, short for old time. Shortened so it doesn't get confused
+    with main's old_time variable.
+    """
+    old = 0.0
+    old = float(input("Please enter the total game run time "
+                      "at the start of the session \n(in decimal "
+                      "form): "))
+    return old
+
+
+def get_new_time():
+    """
+    This function gets the new time from the user
+    :return: new, short for new time. Shortened so it doesn't get confused
+    with main's new_time variable.
+    """
+    new = 0.0
+    new = float(input("Please enter the total game run time "
+                      "at the end of the session \n(in decimal "
+                      "form): "))
+    return new
+
+
+def time_calc_full(old_time, new_time):
+    """
+    Calculates the true session time
+    :param old_time: One of two times the program works with. should be, but
+    doesn't have to be, the lower of the two times. This value should be
+    obtained from the user or a file.
+    :param new_time: One of two times the program works with. should be, but
+    doesn't have to be, the higher of the two times. This value should be
+    obtained from the user or a file.
+    :return: sesh_full, short for session_full.
+    """
+    sesh_full = 0.0
+    sesh_full = (new_time - old_time)
+    return sesh_full
+
+
+def time_calc_hrs(session_time_full):
+    """
+    Calculates the session time in hours
+    :param session_time_full: the variable that was assigned to the result of
+    time_calc_full(). Should be a float.
+    :return: sesh_hrs, short for session_hours
+    """
+    sesh_hrs = 0.0
+    sesh_hrs = session_time_full // 1  # Truncates the decimal
+    return sesh_hrs
+
+
+def time_calc_mins(session_time_full):
+    """
+    Calculates the session time in minutes
+    :param session_time_full: The variable that was assigned to the result of
+    time_calc_full(). Should be a float.
+    :return: sesh_mins, short for session_minutes.
+    """
+    sesh_mins = 0.0
+    sesh_mins = (session_time_full % 1) * 60  # Truncates to decimal
+    return sesh_mins
+
+
+def output(session_time_full, session_time_hrs, session_time_mins):
+    """
+    Outputs the results to the user
+    :param session_time_full: The result of time_calc_full()
+    :param session_time_hrs: The result of time_calc_hrs()
+    :param session_time_mins: The result of time_calc_mins()
+    :return: nothing
+    """
+    if session_time_full == 1:
+        print("This session's time is", int(session_time_hrs), "hour.")
+    else:
+        if session_time_hrs == 1:
+            hr_plurality = "hour"
+        else:
+            hr_plurality = "hours"
+        if session_time_mins == 1:
+            min_plurality = "minute."
+        else:
+            min_plurality = "minutes."
+        print("This session's time is", round(session_time_full, 2), "or approximately",
+              int(session_time_hrs), hr_plurality, "and", int(session_time_mins),
+              min_plurality, ".")
+
+
+if __name__ == "__main__":
+    main()
