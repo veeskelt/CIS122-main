@@ -71,13 +71,13 @@ print("A", distance, "mile trip would cost you ${:.2f}".format(trip_cost))
 #   trip_cost = (distance / fuel_mpg) * fuel_cost
 # distance = 20
 # trip_cost = [trip_cost formula for 20 miles]
-# Print "A 20-mile trip would cost you ${:.2f}".format(trip_cost)
+# Print "A 20 mile trip would cost you ${:.2f}".format(trip_cost)
 #
 # distance = 75
 # trip_cost = [trip_cost formula for 75 miles]
-# Print "A 75-mile trip would cost you ${:.2f}".format(trip_cost)
+# Print "A 75 mile trip would cost you ${:.2f}".format(trip_cost)
 #
 # distance = 500
 # # trip_cost = [trip_cost formula for 500 miles]
-# Print "A 250-mile trip would cost you ${:.2f}".format(trip_cost)
+# Print "A 250 mile trip would cost you ${:.2f}".format(trip_cost)
 # ***************************************************************
