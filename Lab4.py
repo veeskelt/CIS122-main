@@ -33,21 +33,17 @@ def main():
     old_time = 0.0
     new_time = 0.0
     session_time_full = 0.0
-    session_time_hrs = 0.0
+    session_time_hrs = 0
     session_time_mins = 0.0
 
     greeting()
     old_time = get_old_time()
     new_time = get_new_time()
-    session_time_full = abs(time_calc_full(old_time, new_time))
-    session_time_hrs = abs(time_calc_hrs(session_time_full))
-    session_time_mins = abs(time_calc_mins(session_time_full))
+    session_time_full = time_calc_full(old_time, new_time)
+    session_time_hrs = time_calc_hrs(session_time_full)
+    session_time_mins = time_calc_mins(session_time_full)
 
     output(session_time_full, session_time_hrs, session_time_mins)
-    # The variables being assigned the output of the calc functions are
-    # converted to the absolute values of the outputs to account for
-    # the user entering the numbers in the wrong order, as I have
-    # done many times while testing already.
 
 
 def greeting():
@@ -98,7 +94,10 @@ def time_calc_full(old_time, new_time):
     :return: sesh_full, short for session_full.
     """
     sesh_full = 0.0
-    sesh_full = (new_time - old_time)
+    sesh_full = abs((new_time - old_time))
+    # The session time variables are being converted to absolute values in all
+    # The time_calc functions to account for the user entering the times in
+    # The wrong order.
     return sesh_full
 
 
@@ -109,8 +108,9 @@ def time_calc_hrs(session_time_full):
     time_calc_full(). Should be a float.
     :return: sesh_hrs, short for session_hours
     """
-    sesh_hrs = 0.0
-    sesh_hrs = session_time_full // 1  # Truncates the decimal
+    sesh_hrs = 0
+    sesh_hrs = int(abs(session_time_full // 1))  # Truncates the decimal
+    # We convert this to int because we only need to be an int
     return sesh_hrs
 
 
@@ -123,6 +123,8 @@ def time_calc_mins(session_time_full):
     """
     sesh_mins = 0.0
     sesh_mins = (session_time_full % 1) * 60  # Truncates to decimal
+    sesh_mins = round(sesh_mins, 2)  # Round it up or down, as the abs function
+    sesh_mins = abs(sesh_mins)       # doesn't appear to properly round.
     return sesh_mins
 
 
@@ -135,6 +137,7 @@ def output(session_time_full, session_time_hrs, session_time_mins):
     :return: nothing
     """
     if session_time_full == 1:
+        # If the runtime is exactly one hour
         print("This session's time is", int(session_time_hrs), "hour.")
     else:
         if session_time_hrs == 1:
@@ -145,9 +148,18 @@ def output(session_time_full, session_time_hrs, session_time_mins):
             min_plurality = "minute."
         else:
             min_plurality = "minutes."
-        print("This session's time is", round(session_time_full, 2), "or approximately",
-              int(session_time_hrs), hr_plurality, "and", int(session_time_mins),
-              min_plurality, ".")
+
+        if hr_plurality == "hours" and session_time_mins == 0:
+            # If the runtime is more than one hour and 0 minutes
+            print("This session's time is", session_time_hrs, "hours.")
+        elif hr_plurality == "hours" and session_time_hrs == 0 and session_time_mins > 1:
+            # If the playtime is 0 hours and some-odd minutes
+            print("This session's playtime is ", session_time_mins, "minutes.")
+        else:
+            # If the playtime is >1 hours and some-odd minutes
+            print("This session's time is", round(session_time_full, 2),
+                  " hours, or approximately", int(session_time_hrs),
+                  hr_plurality, "and", int(session_time_mins),min_plurality)
 
 
 if __name__ == "__main__":
