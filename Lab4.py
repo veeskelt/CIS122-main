@@ -154,12 +154,12 @@ def output(session_time_full, session_time_hrs, session_time_mins):
             print("This session's time is", session_time_hrs, "hours.")
         elif hr_plurality == "hours" and session_time_hrs == 0 and session_time_mins > 1:
             # If the playtime is 0 hours and some-odd minutes
-            print("This session's playtime is ", session_time_mins, "minutes.")
+            print("This session's playtime is", session_time_mins, "minutes.")
         else:
             # If the playtime is >1 hours and some-odd minutes
             print("This session's time is", round(session_time_full, 2),
                   " hours, or approximately", int(session_time_hrs),
-                  hr_plurality, "and", int(session_time_mins),min_plurality)
+                  hr_plurality, "and", int(session_time_mins), min_plurality)
 
 
 if __name__ == "__main__":
