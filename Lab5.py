@@ -10,7 +10,7 @@
 # Output: simple session time, session time in hours,
 #   session time in minutes
 # Sources: Lab 5 specifications, got help from a friend debugging why my average
-# function was breaking
+# function was breaking again
 # *****************************************************************************
 #                          Sample Run
 # Hello! This program calculates a session length of a game after
