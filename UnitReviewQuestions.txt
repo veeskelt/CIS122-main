@@ -37,9 +37,27 @@ Week 4
 	-Why does elif exist if it's just a shortened else-if statement?
 		-Brevity and ease of writing code
 	-Why are we not learning about input sanitization yet?
-		-fuck you that's why
+		-Because checking inputs for anything beyond strings matching is
+		complicated.
 	-Why are variables initialized at the beginning of a function if Python
 	 works just fine if they're not?
 		-It's good practice, as other languages do not work like this. It also 
 		 allows for better debugging as you do not have to worry about the
 		 type getting misintepreted somewhere due to sloppy code or user error.
+
+Week 5
+    -What does __name__ do?
+        -
+    -What is the difference between a for and while loop?
+        -A for loop iterates its code until a bound is reached, where the code
+         increments that bound each time. A while loop simple loops the code
+         until some condition is reached.
+    -Other languages have the ability to specify how much an accumulator
+     variable moves during the definition of a for loop. Why not in python?
+        -It does, just not in the way you're used to.
+         whereas in c++ it's something like:
+            for (int i = 0, i < 10, ++1)
+         where the iterative variable, its range and its incrementation are
+         all defined on the same line, for loops in python use the range
+         function instead to define the range and the ++ function works
+         differently.
