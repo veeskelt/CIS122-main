@@ -1,7 +1,7 @@
 # *****************************************************************************
 # Author: Vega Skelton
-# Lab: Lab 4
-# Date: 2/1/2024
+# Lab: Lab 5
+# Date: 2/9/2024
 # Description: Example: This program prompts the user for the
 #   playtime of a yet unspecified game before and after a session
 #   after a session and output the session time in hours and
@@ -9,8 +9,8 @@
 # Input: old play time, new play time
 # Output: simple session time, session time in hours,
 #   session time in minutes
-# Sources: Lab 3 specifications and any other substantial
-# aids, like web pages
+# Sources: Lab 5 specifications, got help from a friend debugging why my average
+# function was breaking again
 # *****************************************************************************
 #                          Sample Run
 # Hello! This program calculates a session length of a game after
@@ -35,15 +35,17 @@ def main():
     session_time_full = 0.0
     session_time_hrs = 0
     session_time_mins = 0.0
-
-    greeting()
-    old_time = get_old_time()
-    new_time = get_new_time()
-    session_time_full = time_calc_full(old_time, new_time)
-    session_time_hrs = time_calc_hrs(session_time_full)
-    session_time_mins = time_calc_mins(session_time_full)
-
-    output(session_time_full, session_time_hrs, session_time_mins)
+    cont = "y"
+    while cont == "y":
+        greeting()
+        old_time = get_old_time()
+        new_time = get_new_time()
+        session_time_full = time_calc_full(old_time, new_time)
+        session_time_hrs = time_calc_hrs(session_time_full)
+        session_time_mins = time_calc_mins(session_time_full)
+        output(session_time_full, session_time_hrs, session_time_mins)
+        cont = proceed()
+    exit_message()
 
 
 def greeting():
@@ -54,6 +56,23 @@ def greeting():
     print("Hello! This program calculates a session length of a program after"
           " asking for \n the run times of program at the the beginning and "
           "end of a session.")
+
+
+def proceed():
+    """Prompts the user for a request to continue until a valid input is
+    entered ('y' or 'n').
+    :return: cont, a char, represents
+    """
+
+    # cont = ""
+    cont = input("\nDo you want to continue? (y/n) ")
+    cont = cont.lower()
+    # The following checks to make sure the input was a valid input
+    if cont != 'y' and cont != 'n':
+        print("This is not a valid input. Please try again.")
+        cont = input("Do you want to continue? (y/n) ")
+        cont = cont.lower()  # Set it to lowercase to match cases elsewhere
+    return cont
 
 
 def get_old_time():
@@ -91,7 +110,7 @@ def time_calc_full(old_time, new_time):
     :param new_time: One of two times the program works with. should be, but
     doesn't have to be, the higher of the two times. This value should be
     obtained from the user or a file.
-    :return: sesh_full, short for session_full.
+    :return: sesh_full, short for the full session time.
     """
     sesh_full = 0.0
     sesh_full = abs((new_time - old_time))
@@ -106,7 +125,7 @@ def time_calc_hrs(session_time_full):
     Calculates the session time in hours
     :param session_time_full: the variable that was assigned to the result of
     time_calc_full(). Should be a float.
-    :return: sesh_hrs, short for session_hours
+    :return: sesh_hrs, short for the session time in hours
     """
     sesh_hrs = 0
     sesh_hrs = int(abs(session_time_full // 1))  # Truncates the decimal
@@ -119,7 +138,7 @@ def time_calc_mins(session_time_full):
     Calculates the session time in minutes
     :param session_time_full: The variable that was assigned to the result of
     time_calc_full(). Should be a float.
-    :return: sesh_mins, short for session_minutes.
+    :return: sesh_mins, short for the session time in minutes minus hours.
     """
     sesh_mins = 0.0
     sesh_mins = (session_time_full % 1) * 60  # Truncates to decimal
@@ -162,6 +181,13 @@ def output(session_time_full, session_time_hrs, session_time_mins):
             print("This session's time is", round(session_time_full, 2),
                   " hours, or approximately", int(session_time_hrs),
                   hr_plurality, "and", int(session_time_mins), min_plurality)
+
+
+def exit_message():
+    """This function prints an exit message.
+    :return: nothing"""
+    print("\nThank you for using this program.")
+    print("Have a nice day!")
 
 
 if __name__ == "__main__":
