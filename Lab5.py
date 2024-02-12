@@ -9,8 +9,7 @@
 # Input: old play time, new play time
 # Output: simple session time, session time in hours,
 #   session time in minutes
-# Sources: Lab 5 specifications, got help from a friend debugging why my average
-# function was breaking again
+# Sources: Lab 5 specifications
 # *****************************************************************************
 #                          Sample Run
 # Hello! This program calculates a session length of a game after
@@ -35,6 +34,9 @@ def main():
     session_time_full = 0.0
     session_time_hrs = 0
     session_time_mins = 0.0
+    hr_plurality = ""
+    mins_plurality = ""
+    full_plurality = False
     cont = "y"
     while cont == "y":
         greeting()
@@ -43,7 +45,10 @@ def main():
         session_time_full = time_calc_full(old_time, new_time)
         session_time_hrs = time_calc_hrs(session_time_full)
         session_time_mins = time_calc_mins(session_time_full)
-        output(session_time_full, session_time_hrs, session_time_mins)
+        hr_plurality, mins_plurality, full_plurality = plurality_calc(
+            session_time_full, session_time_hrs, session_time_mins)
+        output(hr_plurality, mins_plurality, full_plurality,
+               session_time_full, session_time_hrs, session_time_mins)
         cont = proceed()
     exit_message()
 
@@ -59,12 +64,12 @@ def greeting():
 
 
 def proceed():
-    """Prompts the user for a request to continue until a valid input is
+    """
+    Prompts the user for a request to continue until a valid input is
     entered ('y' or 'n').
     :return: cont, a char, represents
     """
-
-    # cont = ""
+    cont = ""
     cont = input("\nDo you want to continue? (y/n) ")
     cont = cont.lower()
     # The following checks to make sure the input was a valid input
@@ -72,6 +77,7 @@ def proceed():
         print("This is not a valid input. Please try again.")
         cont = input("Do you want to continue? (y/n) ")
         cont = cont.lower()  # Set it to lowercase to match cases elsewhere
+        print("\n")
     return cont
 
 
@@ -143,49 +149,79 @@ def time_calc_mins(session_time_full):
     sesh_mins = 0.0
     sesh_mins = (session_time_full % 1) * 60  # Truncates to decimal
     sesh_mins = round(sesh_mins, 2)  # Round it up or down, as the abs function
-    sesh_mins = abs(sesh_mins)       # doesn't appear to properly round.
+    sesh_mins = abs(sesh_mins)  # doesn't appear to properly round.
     return sesh_mins
 
 
-def output(session_time_full, session_time_hrs, session_time_mins):
+def plurality_calc(session_time_full, session_time_hrs, session_time_mins):
+    """
+    This function determines the plurality of the variables and assigns strings
+    based on the results. If the plurality for hours is "hour" and
+    session_time_mins = 0, set full_plural to false to tell the output
+    function to perform the first nested statement in the if statement.
+    :param session_time_full: session time in decimal output, full precision
+    :param session_time_hrs: the session time's hours
+    :param session_time_mins: the session time's minutes
+    :return hr_plural:, a bool storing the plurality of the session hours
+    :return min_plural:, a bool storing the plurality of the session minutes
+    :return full_plural:, a bool storing whether the full session time is
+    exactly one hour
+    """
+    hr_plural = True
+    mins_plural = True
+    full_plural = True
+    if session_time_mins == 0 and session_time_hrs == 1:
+        full_plural = False
+    if session_time_mins <= 1:
+        mins_plural = False
+    if session_time_hrs <= 1:
+        hr_plural = False
+    # If either were above 1, we would be setting the variable to true, which
+    # they're initialized to.
+    return hr_plural, mins_plural, full_plural
+
+
+def output(hr_plurality, min_plurality, full_plurality, session_time_full,
+           session_time_hrs, session_time_mins):
     """
     Outputs the results to the user
+    :param hr_plurality: string, determines if "hours" or "hour" is used
+    :param min_plurality: string, determines if "minutes" or "minute" is used
+    :param full_plurality: string, determines if a truncated output is written
     :param session_time_full: The result of time_calc_full()
     :param session_time_hrs: The result of time_calc_hrs()
     :param session_time_mins: The result of time_calc_mins()
     :return: nothing
     """
-    hr_plurality = ""
-    min_plurality = ""
-    if session_time_full == 1:
-        # If the runtime is exactly one hour
+    if hr_plurality is False and session_time_mins == 0:
+        # If the runtime is exactly one hour, we don't need any other output
         print("This session's time is", int(session_time_hrs), "hour.")
     else:
-        if session_time_hrs == 1:
-            hr_plurality = "hour"
-        else:
-            hr_plurality = "hours"
-        if session_time_mins == 1:
-            min_plurality = "minute."
-        else:
-            min_plurality = "minutes."
-
-        if hr_plurality == "hours" and session_time_mins == 0:
+        if hr_plurality is True and session_time_mins == 0:
             # If the runtime is more than one hour and 0 minutes
-            print("This session's time is", session_time_hrs, "hours.")
-        elif hr_plurality == "hours" and session_time_hrs == 0 and session_time_mins > 1:
+            print("This session's time is", session_time_hrs, "hours")
+
+        elif hr_plurality is False and session_time_hrs == 0 and min_plurality is True:
             # If the playtime is 0 hours and some-odd minutes
             print("This session's playtime is", session_time_mins, "minutes.")
-        else:
+
+        elif hr_plurality is False and min_plurality is True:
+            # If the runtime is 1 hour and some-odd minutes
+            print("This session's time is ", session_time_hrs, "hour and", session_time_mins,
+                  "minutes.")
+
+        elif hr_plurality is True and min_plurality is True:
             # If the playtime is >1 hours and some-odd minutes
             print("This session's time is", round(session_time_full, 2),
                   " hours, or approximately", int(session_time_hrs),
-                  hr_plurality, "and", int(session_time_mins), min_plurality)
+                  "hours and", int(session_time_mins), "minutes.")
 
 
 def exit_message():
-    """This function prints an exit message.
-    :return: nothing"""
+    """
+    This function prints an exit message.
+    :return: nothing
+    """
     print("\nThank you for using this program.")
     print("Have a nice day!")
 
