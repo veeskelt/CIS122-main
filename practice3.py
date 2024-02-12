@@ -68,6 +68,7 @@ def input_height():
     Gets user input for diameter
     :return: height
     """
+    height = 0.0
     height = float(input("Enter cylinder height (in): "))
     return height
 
