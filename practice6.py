@@ -33,6 +33,7 @@ QUIT = 4
 
 
 def main():
+
     welcome_message()
     operation_loop()
     exit_message()
