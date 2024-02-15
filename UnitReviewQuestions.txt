@@ -47,7 +47,8 @@ Week 4
 
 Week 5
     -What does __name__ do?
-        -
+        -Underscores are a special use case in python which we haven't learned
+		 yet. 
     -What is the difference between a for and while loop?
         -A for loop iterates its code until a bound is reached, where the code
          increments that bound each time. A while loop simple loops the code
