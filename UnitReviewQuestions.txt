@@ -62,3 +62,13 @@ Week 5
          all defined on the same line, for loops in python use the range
          function instead to define the range and the ++ function works
          differently.
+Week 6
+	-What does "import [class name] as [whatever this means]" (ie import 
+	 valid as v) mean?
+		-importing a module as [something] is a shorthand for assigning
+		 [something] to mean the full module name.
+	-does the get.integer function only allow integers to be input without
+	 throwing program-ending errors if the user enters something else?
+		-Yes! User input checking stocks are soaring rn
+	-Why do I have such a hard time with getting if and while statements right?
+		-You're not good at executing code on your own, good thing you're stubborn

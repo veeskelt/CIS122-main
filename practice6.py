@@ -57,14 +57,12 @@ def operation_loop():
         elif choice == 2:
             deposit = get_deposit()
             balance = calc_deposit(balance, deposit)
-            # print("Funds deposited: $", format(deposit, ".2f"))
             print_deposit(deposit)
             choice = get_choice()
         elif choice == 3:
             withdrawal = get_withdrawal()
             check_withdrawal(balance, withdrawal)
             balance = calc_withdrawal(balance, withdrawal)
-            # print("Funds withdrawn: $", format(withdrawal, ".2f"))
             print_withdrawal(withdrawal)
             choice = get_choice()
 
