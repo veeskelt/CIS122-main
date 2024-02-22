@@ -72,3 +72,12 @@ Week 6
 		-Yes! User input checking stocks are soaring rn
 	-Why do I have such a hard time with getting if and while statements right?
 		-You're not good at executing code on your own, good thing you're stubborn
+
+Week 7: Lists
+	-Do lists have to have the same variable type in them?
+		-No.
+	-Does [list].append put the new entry at the end? How do I manipulate the 
+	 contents of a specific entry?
+		-Yes. To manipulate a specific entry, call list[target]
+	-In the for loop at the end: is index anything special?
+		-No, it's just the iterative variable. it can be "i", or anything else
