@@ -24,6 +24,7 @@
 import valid as v
 CARRY_ON = 'y'
 
+
 def main():
     """
     This program calculates the session length of a given thing given the
@@ -39,7 +40,6 @@ def main():
     session_time_mins = 0.0
     hr_plurality = ""
     mins_plurality = ""
-    full_plurality = False
     cont = "y"
     while cont == CARRY_ON:
         # While cont is equal to CARRY_ON, the program loops. cont can only be
@@ -92,7 +92,7 @@ def proceed():
     :return: cont, a char, represents user's choice
     """
     cont = ""
-    cont = v.get_y_or_n("\nDo you want to continue? (y/n) ")
+    cont = v.get_y_or_n("\nDo you want to continue? (y/n): ")
     return cont
 
 
@@ -103,7 +103,7 @@ def get_old_time():
     with main's old_time variable.
     """
     old = 0.0
-    old = v.get_real("\nPlease enter the total game run time "
+    old = v.get_real("\nPlease enter the total program run time "
                      "at the start of the session \n(in decimal "
                      "form): ")
     return old
@@ -116,7 +116,7 @@ def get_new_time():
     with main's new_time variable.
     """
     new = 0.0
-    new = v.get_real("Please enter the total game run time "
+    new = v.get_real("Please enter the total program run time "
                      "at the end of the session \n(in decimal "
                      "form): ")
     return new
@@ -259,7 +259,7 @@ def output(hr_plurality, min_plurality, session_time_full, session_time_hrs,
         elif hr_plurality is False and min_plurality is True:
             # If the runtime is 1 hour and some-odd minutes
             print("This session's time is ", session_time_hrs, "hour and",
-                  session_time_mins, min_plurality, "minutes.")
+                  session_time_mins, "minutes.")
 
         elif hr_plurality is True and min_plurality is True:
             # If the playtime is >1 hours and some-odd minutes
@@ -293,3 +293,4 @@ if __name__ == "__main__":
 # Highlight outliers, 0 values
 #   Possibly add notes to these outliers and 0 values
 # Version that hooks into steam API for game runtimes???
+# Does blender have something similar I can hook into?
