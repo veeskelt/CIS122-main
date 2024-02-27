@@ -73,7 +73,7 @@ Week 6
 	-Why do I have such a hard time with getting if and while statements right?
 		-You're not good at executing code on your own, good thing you're stubborn
 
-Week 7: Lists
+Week 7: Lists I
 	-Do lists have to have the same variable type in them?
 		-No.
 	-Does [list].append put the new entry at the end? How do I manipulate the 
@@ -81,3 +81,12 @@ Week 7: Lists
 		-Yes. To manipulate a specific entry, call list[target]
 	-In the for loop at the end: is index anything special?
 		-No, it's just the iterative variable. it can be "i", or anything else
+
+Week 8: Lists II
+    -Are parallel lists linked within the code or logically?
+        -Logically. There's nothing about two lists that are linked inherently,
+         rather in their use.
+    -CAN you link lists code-wise?
+        -
+    -Are conventions reasons for storing list strings in all uppercase or lowercase?
+        -No, it's preference.
