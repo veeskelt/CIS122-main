@@ -125,7 +125,7 @@ def calc_list_average(a_list):
 
 
 def main():
-    a_list = [9, 200, 300, 4, 5, 6, 7, 1, 8]
+    a_list = [1, 2, 3, 4, 5, 6]
 
     # print_list(a_list)
 
@@ -160,5 +160,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
+    main()
     exit(0)
