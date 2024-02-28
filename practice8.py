@@ -44,9 +44,12 @@ def main():
     The main function of the program
     :return: none
     """
-    cont = "y"
+    # These are debugging lines. Got tired or redoing inputs every time I
+    # wanted to test something
 #    candidate_list = ["Green", "Red", "Blue", "Purple"]
-#    cand_votes = [100, 34, 99, 105]  # These are debugging lines
+#    cand_votes = [100, 34, 99, 105]
+
+    cont = "y"
     candidate_list = []
     cand_votes = []
     vote_percent = []
