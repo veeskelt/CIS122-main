@@ -1,0 +1,27 @@
+-Greeting
+-Get input from user:
+
+"Please enter the total session run time's hours: "
+    -This only accepts ints (v.get_int)
+    -Store it in run_time_hrs.append()
+"Please enter the total session's run time in minutes: "
+    -This also only accepts ints
+    -Store it in run_time_mins.append()
+    -Before this is returned, divide the input by 60 to get a decimal value
+"Do you have another run time to enter? (y/n)
+    -standard "while cont == y" loop
+    -Loops the user input functions
+
+Once the user is done entering total run times, run the calcs
+    -Convert the run_time_hrs and run_time_mins to run_time_full:
+        for i in range(len(run_time_hrs)):
+            total_time = run_time_hrs[i] + run_time_mins[i]
+            run_time_full.append(total_time)
+    -Now perform math to find session times (differences between total session times)
+        for i in range (len(run_time_hrs)):
+            if i == 1:
+                sesh_time = run_time_full[i]
+                sesh_list.append(sesh_time)
+            else:
+                sesh_time = run_time_full[i] - run_time_full[i-1]
+                sesh_list.append(sesh_time)

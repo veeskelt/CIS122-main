@@ -5,12 +5,12 @@
 # numbers, print the highest and lowest of them, and tell you their sum and
 # average!
 # list_sum of the numbers!
-# Enter your number: 4
-# Continue? y
-# Enter your number: 8
-# Continue? y
-# Enter your number: 12
-# Continue? n
+# Enter a real number: 4
+# Do you want to continue? (y/n) y
+# Enter a real number: 8
+# Do you want to continue? (y/n) y
+# Enter a real number: 12
+# Do you want to continue? (y/n) n
 # The sum of these numbers is 24
 # The average of these numbers is 8
 # The lowest of these numbers is 4
