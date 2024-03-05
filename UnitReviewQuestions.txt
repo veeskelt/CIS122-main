@@ -87,6 +87,14 @@ Week 8: Lists II
         -Logically. There's nothing about two lists that are linked inherently,
          rather in their use.
     -CAN you link lists code-wise?
-        -
+        -Not with what we've learned.
     -Are conventions reasons for storing list strings in all uppercase or lowercase?
         -No, it's preference.
+
+Week 9: Objects I
+	-I have far more than 3 questions
+		-That's not a question.
+	-Is there another way to explain OOP?
+		-Yes, Prof. Bhatia clarifies it very well
+	-What do the underscores do?
+		-

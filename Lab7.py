@@ -14,10 +14,29 @@
 # Hello! This program calculates a session length of a program after
 # asking the play times of the beginning and end of a working session.
 #
-# Please enter the game run time at the start of the session: 20.6
-
-# Please enter the run time at the end: 22.5
-# This session lasted for 1.9 hours, or roughly 1 hours and 54 minutes.
+# Please enter the total program run time in hours:
+# (whole numbers only): 20
+#
+# Please enter the total program run time in minutes
+# (whole numbers only): 36
+#
+# Do you want to enter another session? (y/n): y
+#
+# Please enter the total program run time in hours:
+# (whole numbers only): 22
+#
+# Please enter the total program run time in minutes
+# (whole numbers only): 30
+#
+# Do you want to enter another session? (y/n): n
+# Results:
+# Run Time (hours)    Session Time (hours)
+# _____________________________________
+# 20.6                20.6
+# 22.5                1.8999999999999986
+#
+# Thank you for using this program.
+# Have a nice day!
 # *****************************************************************************
 
 
@@ -175,7 +194,8 @@ def output(run_time_full, sesh_list):
     print("{: <20}{: <10}".format("Run Time (hours)", "Session Time (hours)"))
     print("_____________________________________")
     for i in range(len(run_time_full)):
-        print("{: <20}{: <10}".format(run_time_full[i], sesh_list[i]))
+        print("{: <20}{: <10}".format("{:.2f}".format(run_time_full[i]),
+                                      "{:.2f}".format(sesh_list[i])))
 
 
 def exit_message():
