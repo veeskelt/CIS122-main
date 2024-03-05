@@ -1,0 +1,37 @@
+01: Setting the class called "book"
+02: Private string variable called "title"
+03: Private string variable called "author"
+04: Private string variable called "publisher"
+05: Private int variable called "copies_sold"
+-- These are all attributes of the class "book". The underscores indicate that they're private variables.
+07: Object initialization module. it always has "self" as a variable, used to store the object being manipulated.
+08: Setting the "title" attribute of the book object being created to whatever is passed in the "t" variable's place.
+09: Setting the "author" attribute of the book object being created to whatever is passed in the "a" variable's place.
+10: Setting the "publisher" attribute of the book object being created to whatever is passed in the "p" variable's place.
+11: Setting the "copies_sold" attribute of the book object being created to whatever is passed in the "p" variable's place.
+
+13: An internal function to fetch the "title" attribute of the passed object. An accessor or  "getter" function.
+14: the return statement of the above function. returns "self.__title__"
+
+16: See line 13 but for the "author" attribute.
+17: See line 14 but for "self.__author__".
+
+19: See line 13 but for the "publisher" attribute.
+20: See line 14 but for "self.__publisher__".
+
+22: See line 13 but for the "copies sold" attribute.
+23: See line 14 but for "self.__copies_sold__".
+
+25: An internal function to change the "title" attribute of the passed object. A mutator or "setter" function.
+26: Sets self.__title__ to the passed variable "t".
+
+28: See line 25 but for the "author" attribute.
+29: See line 26 but for "self.__author__" and "a".
+
+31: See line 25 but for the "publisher" attribute.
+32: See line 26 but for "self.__publisher__" and "p".
+
+34: See line 25 but for the "copies_sold" attribute.
+35: See line 26 but for "self.__copies_sold__" and "c".
+
+40: declaring the object "my_book" as an instance of the Book class with the listed attributes. Referencing classes is case-sensitive.
