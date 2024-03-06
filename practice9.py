@@ -1,4 +1,6 @@
 import valid as v
+
+
 class Restaurant:
     __name__ = ""
     __type__ = ""
@@ -42,18 +44,61 @@ def main():
     # print objects after each update
     restaurant_1 = Restaurant("", "", "", 0)
     restaurant_2 = Restaurant("", "", "", 0)
+    restaurant_name = ""
+    restaurant_type = ""
+    restaurant_price = ""
+    restaurant_rating = 0
     cont = 'Y'
-    while cont == 'Y':
-        get_restaurant_name()
-        print(restaurant_1.get_name(), restaurant_1.get_type(),
-              restaurant_1.get_price_range(), restaurant_1.get_rating())
-        get_restaurant_type()
-        print(restaurant_1.get_name(), restaurant_1.get_type(),
-              restaurant_1.get_price_range(), restaurant_1.get_rating())
-        get_restaurant_price_range()
-        print(restaurant_1.get_name(), restaurant_1.get_type(),
-              restaurant_1.get_price_range(), restaurant_1.get_rating())
-        get_restaurant_rating()
-        print(restaurant_1.get_name(), restaurant_1.get_type(),
-              restaurant_1.get_price_range(), restaurant_1.get_rating())
+    #while cont == 'Y':
+    restaurant_name = get_restaurant_name()
+    restaurant_1.set_name(restaurant_name)
+    print(restaurant_1.get_name(), restaurant_1.get_type(),
+          restaurant_1.get_price_range(), restaurant_1.get_rating())
+    restaurant_type = get_restaurant_type()
 
+    restaurant_1.set_type(restaurant_type)
+    print(restaurant_1.get_name(), restaurant_1.get_type(),
+          restaurant_1.get_price_range(), restaurant_1.get_rating())
+
+    restaurant_price = get_restaurant_price()
+    print(restaurant_1.get_name(), restaurant_1.get_type(),
+          restaurant_1.get_price_range(), restaurant_1.get_rating())
+    restaurant_rating = get_restaurant_rating()
+
+    restaurant_1.set_rating(restaurant_rating)
+    print(restaurant_1.get_name(), restaurant_1.get_type(),
+          restaurant_1.get_price_range(), restaurant_1.get_rating())
+
+
+def get_restaurant_name():
+    restaurant_name = ""
+    restaurant_name = v.get_string("Enter the name of the restaurant: ")
+    return restaurant_name
+
+
+def get_restaurant_type():
+    restaurant_type = ""
+    restaurant_type = v.get_string("Enter the type of restaurant: ")
+    return restaurant_type
+
+
+def get_restaurant_price():
+    restaurant_price = ""
+    restaurant_price = v.get_string("Enter the price of the restaurant: ")
+    print(restaurant_price)
+    while restaurant_price != "$" and restaurant_price != "$$" and restaurant_price != "$$$":
+        print("Invalid input. Please try again.")
+        restaurant_price = v.get_string("Enter the price of the restaurant: ")
+    return restaurant_price
+
+
+def get_restaurant_rating():
+    restaurant_rating = 0
+    restaurant_rating = v.get_integer("Enter the rating of the restaurant: ")
+    while restaurant_rating > 5 or restaurant_rating < 0:
+        print("Rating cannot be greater than 5 or less than 0.")
+        restaurant_rating = v.get_string("Enter the rating of the restaurant: ")
+    return restaurant_rating
+
+
+main()
