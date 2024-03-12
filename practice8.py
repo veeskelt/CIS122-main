@@ -12,15 +12,15 @@
 # Please enter their votes: 100
 # Are there more candidates? ('y' to continue, 'n' to exit): y
 #
-# Enter candidate name: Red
+# Please enter the candidate: Red
 # Please enter their votes: 34
 # Are there more candidates? ('y' to continue, 'n' to exit): y
 #
-# Enter candidate name: Green
+# Please enter the candidate: Green
 # Please enter their votes: 99
 # Are there more candidates? ('y' to continue, 'n' to exit): y
 #
-# Enter candidate name: Green
+# Please enter the candidate: Green
 # Please enter their votes: 105
 # Are there more candidates? ('y' to continue, 'n' to exit): n
 #
@@ -71,7 +71,7 @@ def greeting():
     """
     print("Welcome to the Election calculator.")
     print("Enter the candidates and their votes and this program will calculate"
-          "the \nresults of the election.")
+          " the \nresults of the election.")
 
 
 def get_candidate(candidate_list):
@@ -80,7 +80,7 @@ def get_candidate(candidate_list):
     :param candidate_list: a list of the candidates.
     :return: nothing
     """
-    candidate_list.append(v.get_string("Please enter the candidate: "))
+    candidate_list.append(v.get_string("\nPlease enter the candidate: "))
 
 
 def get_cand_votes(cand_votes_list):
@@ -143,9 +143,9 @@ def print_results(candidate_list, cand_votes, vote_percent, winner_index):
     :param winner_index: the spot of the winner in the cand_votes list
     :return:
     """
-    print("Results: ")
+    print("\nResults: ")
     print("{: <20}{: <10}{: <4}".format("Candidate", "Votes", "Vote %"))
-    print("_____________________________________")
+    print("____________________________________")
     for i in range(len(candidate_list)):
         print("{: <20}{: <10}".format(candidate_list[i], cand_votes[i]),
               vote_percent[i], "%", sep="")
