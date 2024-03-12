@@ -84,7 +84,7 @@
 # Food           Calories
 # Cereal         150
 # Apple (3)      60
-# Sandwhich (2)  270
+# Sandwich (2)   270
 # Donut (3)      750
 #
 # 1. Add Food
@@ -98,7 +98,7 @@
 # Food           Calories
 # Cereal         150
 # Apple (3)      60
-# Sandwhich (2)  270
+# Sandwich (2)   270
 # Donut (3)      750
 #
 # Total calories: 1230 calories
