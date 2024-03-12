@@ -97,4 +97,24 @@ Week 9: Objects I
 	-Is there another way to explain OOP?
 		-Yes, Prof. Bhatia clarifies it very well
 	-What do the underscores do?
-		-
+		-in this case there a way to "hide" the variables
+
+Week 10: Objects 1
+	-You can make lists of objects???
+		-Yes. Syntax:
+			list = []  # An empty list
+			list.append(object_name_1(attribute_1, attribute_2...))
+			list.append(object_name_2(attribute_1, attribute_2...))
+			etc etc.
+		 To modify any of these objects, you need to access it via list[i], 
+		 where i is the index of the object you want to access
+	-Why single double underscores as opposed to double double underscores?
+		-Double leading underscores triggers "name mangling" in python, where 
+		 names are changed to prevent their access externally. 
+		 Conversely, leading and trailing double underscores indicate "dunder 
+		 names" in python. read more here: 
+		 https://realpython.com/python-double-underscore/
+	-What is __str__?
+		-It's a special dunder python method that when invoked prints a the 
+		 object in question with coder-defined parameters, and is invoked when
+		 the object is printed.

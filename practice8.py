@@ -36,7 +36,6 @@
 # Purple with 105 votes!
 
 import valid as v
-import list_mod as l
 
 
 def main():
@@ -45,7 +44,7 @@ def main():
     :return: none
     """
     # These are debugging lines. Got tired or redoing inputs every time I
-    # wanted to test something
+    # wanted to test something.
 #    candidate_list = ["Green", "Red", "Blue", "Purple"]
 #    cand_votes = [100, 34, 99, 105]
 
@@ -108,7 +107,7 @@ def calc_vote_percent(cand_votes, vote_percent):
     """
     percent = 0.0
     vote_sum = 0
-    vote_sum = l.calc_list_sum(cand_votes)
+    vote_sum = calc_list_sum(cand_votes)
     for i in range(len(cand_votes)):
         percent = (cand_votes[i] / vote_sum) * 100
         percent = round(percent, 2)
@@ -153,6 +152,18 @@ def print_results(candidate_list, cand_votes, vote_percent, winner_index):
     print("\nAnd the winner is...")
     print(candidate_list[winner_index], "with ", cand_votes[winner_index],
           "votes!")
+
+
+def calc_list_sum(a_list):
+    """
+    Sums the values in a list
+    :param a_list: a list of values
+    :return total_sum: the sum of the values
+    """
+    total_sum = 0.0
+    for index in range(len(a_list)):
+        total_sum = total_sum + a_list[index]
+    return total_sum
 
 
 main()

@@ -102,11 +102,11 @@ def calc_list_sum(a_list):
     """
     Sums the values in a list
     :param a_list: a list of values
-    :return: sum of the values
+    :return total_sum: the sum of the values
     """
     total_sum = 0.0
     for index in range(len(a_list)):
-        # we need to check if the items in the list are ints or floats
+        # we need to check if the items in the list are ints and/or floats
         if type(a_list[index]) is int or type(a_list[index]) is float:
             total_sum = total_sum + a_list[index]
     return total_sum
