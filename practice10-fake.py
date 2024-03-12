@@ -19,49 +19,186 @@
 
 # https://online.pcc.edu/d2l/le/content/508474/viewContent/11050239/View
 
+# Welcome to the Stay Healthy App!
+# Enter your calorie goal and then the items and calorie amounts
+# and I will calculate if you met your goal!
+#
+# Enter your daily calorie goal: 2000
+#
+# 1. Add Food
+# 2. List Foods
+# 3. Done adding foods
+#
+# Please enter your choice: 1
+#
+# Please enter the food name: Cereal
+# Please enter the calories in Cereal: 150
+#
+# List of Foods:
+#
+# Food           Calories
+# Cereal         150
+#
+# 1. Add Food
+# 2. List Foods
+# 3. Done adding foods
+#
+# Please enter your choice: 1
+#
+# Please enter the food name: Apple (3)
+# Please enter the calories in Apple (3): 60
+#
+# List of Foods:
+#
+# Food           Calories
+# Cereal         150
+# Apple (3)      60
+#
+# 1. Add Food
+# 2. List Foods
+# 3. Done adding foods
+#
+# Please enter your choice: 1
+#
+# Please enter the food name: Sandwhich (2)
+# Please enter the calories in Sandwhich (2): 270
+#
+# List of Foods:
+#
+# Food           Calories
+# Cereal         150
+# Apple (3)      60
+# Sandwhich (2)  270
+#
+# 1. Add Food
+# 2. List Foods
+# 3. Done adding foods
+#
+# Please enter your choice: 1
+#
+# Please enter the food name: Donut (3)
+# Please enter the calories in Donut (3): 750
+#
+# List of Foods:
+#
+# Food           Calories
+# Cereal         150
+# Apple (3)      60
+# Sandwhich (2)  270
+# Donut (3)      750
+#
+# 1. Add Food
+# 2. List Foods
+# 3. Done adding foods
+#
+# Please enter your choice: 3
+#
+# List of Foods:
+#
+# Food           Calories
+# Cereal         150
+# Apple (3)      60
+# Sandwhich (2)  270
+# Donut (3)      750
+#
+# Total calories: 1230 calories
+# Calorie goal: 2000 calories
+#
+# You did not meet your calorie goal. Maybe eat more tomorrow?
+# Goodbye!
+
 import valid as v
 
 
+class Food:
+    __name: ""  # Double underscores indicate that this is a private variable
+    __calories: 0
+
+    def __init__(self, name, calories):
+        # A dunder method that creates a new object with the supplied fields
+        # when a new object of this type is created
+        # Likewise, self is an instanced variable that says "hey we're doing things to this"
+        self.__name = name
+        self.__calories = calories
+
+    def get_name(self):
+        return self.__name
+
+    def get_calories(self):
+        return self.__calories
+
+    def set_name(self, name):
+        self.__name = name
+
+    def set_calories(self, calories):
+        self.__calories = calories
+
+    def __str__(self):  # A dunder method that, when print(object_instance) is called, runs this function instead
+        printed_string = ""
+        printed_string = "Food Name: " + self.__name + "" + "Calories: " + str(self.__calories)
+        return printed_string
+
+
+QUIT = 3
+
+
 def main():
-    food_list = []
-    calorie_list = []
+    # empty
+    choice = 0
+    foods = []
     calorie_goal = 0
-    more = 'y'
+    more = "y"
     total_calories = 0
-    food_item = ""
-    calories = 0
 
-    welcome_message()
-
+    greeting()
     calorie_goal = get_calorie("Enter your daily calorie goal: ")
+    while choice != QUIT:
+        print_menu()
+        choice = get_choice()
+        if choice == 1:
+            add_food(foods)
+        elif choice == 2:
+            list_food(foods)
 
-    while more == 'y':
-        food_item = v.get_string("\nEnter food item name: ")
-        food_list.append(food_item)
-        calories = get_calorie("Enter calories for " + food_item + ": ")
-        calorie_list.append(calories)
-        more = v.get_y_or_n("Do you have more items to enter (y/n): ")
-
-    print_list(food_list, calorie_list)
-    print_results(calorie_goal, calorie_list)
-    print("\nGoodbye!")
-
-
-def calc_total_calories(calorie_list):
-    num_sum = 0
-    for i in range(len(calorie_list)):
-        num_sum = num_sum + calorie_list[i]
-    return num_sum
+        list_food(foods)
+    total_calories = sum_calories(foods)
+    compare_calories(total_calories, calorie_goal)
+    print("Goodbye!")
 
 
-def print_list(food_list, calorie_list):
-    print("\n{: <15}{: <8}".format("Item name", "Calories"))
-    print("{: <15}{: <8}".format("---------", "--------"))
+def add_food(foods):
+    food_name = ""
+    food_calories = 0
+    food_name = v.get_string("\nPlease enter the food name: ")
+    prompt = ("Please enter the calories in " + food_name + ": ")
+    food_calories = v.get_integer(prompt)
+    if food_calories < 0:
+        print("Invalid input, calories must be greater than or equal to 0.")
+        food_calories = v.get_integer(prompt)
+    foods.append(Food(food_name, food_calories))
 
-    for i in range(len(food_list)):
-        print("{: <15}{: <8}".format(food_list[i], calorie_list[i]))
 
-    print()
+def print_menu():
+    print("\n1. Add Food")
+    print("2. List Foods")
+    print("3. Done adding foods\n")
+
+
+def get_choice():
+    choice = 0
+    choice = v.get_integer("Please enter your choice: ")
+    while choice < 1 or choice > 3:
+        print("Invalid choice.")
+        choice = v.get_integer("Please enter your choice: ")
+    return choice
+
+
+def list_food(foods):
+    print("\nList of Foods:\n")
+    print("{: <15}{: <5}".format("Food", "Calories"))
+    for i in range(len(foods)):
+        print("{: <15}{: <5}".format(foods[i].get_name(),
+                                     foods[i].get_calories()))
 
 
 def get_calorie(prompt):
@@ -74,24 +211,31 @@ def get_calorie(prompt):
             print("Must be positive number.")
 
 
-def print_results(calorie_goal, calorie_list):
-    print_sum = calc_total_calories(calorie_list)
-
-    print("You consumed", print_sum, "calories today.\n")
-
-    if calorie_goal == print_sum:
-        print("Congratulations! You met your goal!")
-    elif calorie_goal > print_sum:
-        print("You were under your goal, look at your list, where can you add calories tomorrow?")
-    else:
-        print("Keep trying! You were over your goal, look at your list, where can you cut back tomorrow?")
+def sum_calories(foods):
+    total_sum = 0
+    for i in range(len(foods)):
+        total_sum = total_sum + foods[i].get_calories()
+    return total_sum
 
 
-def welcome_message():
+def compare_calories(total, goal):
+    print("\nTotal calories:", total, "calories")
+    print("Calorie goal:", goal, "calories")
+    if total > goal:
+        print("\nYou passed your calorie goal. Is there something you can "
+              "go without tomorrow?")
+    elif total < goal:
+        print("\nYou did not meet your calorie goal. Maybe eat more tomorrow?")
+    elif total == goal:
+        print("\nCongratulations, you hit your calorie goal!")
+
+
+def greeting():
     print("Welcome to the Stay Healthy App!")
     print("Enter your calorie goal and then the items and" +
           " calorie amounts \nand I will calculate if you met" +
           " your goal!\n")
 
 
-main()
+if __name__ == "__main__":
+    main()
