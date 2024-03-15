@@ -86,8 +86,8 @@ def main():
         for i in range(len(sesh_list)):
             print(sesh_list[i])
         cont = proceed()
-    for i in range(len(sesh_list)):
-        print(sesh_list[i])
+    session_average = calc_sesh_average(sesh_list)
+    output(times_list, sesh_list, session_average)
 
 
 def get_runtime_hrs():
@@ -173,7 +173,7 @@ def calc_sesh_sum(sesh_list):
     :return:
     """
     sesh_sum = 0.0
-    for i in sesh_list:
+    for i in range(len(sesh_list)):
         sesh = sesh_list[i].get_length()
         sesh_sum = sesh_sum + sesh
     return sesh_sum
@@ -188,6 +188,27 @@ def calc_sesh_average(sesh_list):
     average = 0.0
     average = calc_sesh_sum(sesh_list) / len(sesh_list)
     return average
+
+
+def output(times, sesh_list, average):
+    """
+    Prints the result of all calculations
+    :param times:
+    :param sesh_list:
+    :param average:
+    :return:
+    """
+    full_times = ""
+    sesh_times = ""
+    print("Cumulative results:")
+    print("{:<15} {:<13} {}".format("Total Time", "Session Time", "Notes"))
+    for i in range(len(sesh_list)):
+        full_times = (str(round(times[i], 2)) + " hours")
+        sesh_times = (str(round(sesh_list[i].get_length(), 2)) + " hours")
+        print("{:<3}{:>10} {:>17} {}".format(i + 1, full_times, sesh_times,
+                                             sesh_list[i].get_note()))
+
+    print("Average Session Length: {:.2f} hours".format(average))
 
 
 def greeting():
