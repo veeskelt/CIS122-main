@@ -62,7 +62,7 @@ def main():
     run_time_full = 0
     times_list = []
     sesh_list = []
-    note = ""
+    added_note = ""
     session_time = 0.0
     session_sum = 0.0
     session_average = 0.0
