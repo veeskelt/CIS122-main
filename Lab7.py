@@ -1,7 +1,7 @@
 # *****************************************************************************
 # Author: Vega Skelton
-# Lab: Lab 6
-# Date: 2/15/2024
+# Lab: Lab 7
+# Date: 2/15/2024 (adjusted 3/13/2024)
 # Description: Example: This program prompts the user for the
 #   playtime of any program before and after a session
 #   and output the session time in hours and minutes (rounded).
@@ -9,34 +9,44 @@
 # Output: simple session time, session time in hours,
 #   session time in minutes
 # Sources: Lab 7 specifications, previous labs
+#
 # *****************************************************************************
 #                          Sample Run
-# Hello! This program calculates a session length of a program after
-# asking the play times of the beginning and end of a working session.
+# Hello! This program calculates a session lengths of a program after asking for
+# the run times of program at the beginning of each session.
 #
-# Please enter the total program run time in hours:
-# (whole numbers only): 20
+# Note: when the program asks for the run time in hours, it is referring to the
+# hours portion of the run time; if a program was run for 3 hours and 28 minutes,
+# you would enter 3. Likewise, when it asks for the minutes portion, you would
+# enter 28.
 #
-# Please enter the total program run time in minutes
-# (whole numbers only): 36
+# Please enter the total run time of the program in hours: 20
 #
-# Do you want to enter another session? (y/n): y
+# Now please enter the minutes portion of the run time: 36
 #
-# Please enter the total program run time in hours:
-# (whole numbers only): 22
+# Do you have another run time to enter? (y/n): y
 #
-# Please enter the total program run time in minutes
-# (whole numbers only): 30
+# Note: when the program asks for the run time in hours, it is referring to the
+# hours portion of the run time; if a program was run for 3 hours and 28 minutes,
+# you would enter 3. Likewise, when it asks for the minutes portion, you would
+# enter 28.
 #
-# Do you want to enter another session? (y/n): n
+# Please enter the total run time of the program in hours: 22
+#
+# Now please enter the minutes portion of the run time: 30
+#
+# Do you have another run time to enter? (y/n): n
 # Results:
 # Run Time (hours)    Session Time (hours)
 # _____________________________________
-# 20.6                20.6
-# 22.5                1.8999999999999986
+# 20.60               20.60
+# 22.50               1.90
+# The sum of all session lengths is 22.50
+# The average of all session lengths is 11.25
 #
 # Thank you for using this program.
 # Have a nice day!
+
 # *****************************************************************************
 
 
@@ -57,7 +67,8 @@ def main():
     run_time_mins = []
     run_time_full = []
     sesh_list = []
-
+    session_sum = 0.0
+    session_average = 0.0
     cont = "y"
 
     # Here we greet the user.
@@ -69,6 +80,11 @@ def main():
         # of this loop.
 
         # Gets old_time from the user
+        print("\nNote: when the program asks for the run time in hours, it is "
+              "referring to the \nhours portion of the run time; if a program "
+              "was run for 3 hours and 28 minutes, \nyou would enter 3. "
+              "Likewise, when it asks for the minutes portion, you would "
+              "\nenter 28.")
         get_runtime_hrs(run_time_hrs)
         get_runtime_mins(run_time_mins)
         # "Wanna do it again?"
@@ -76,12 +92,12 @@ def main():
 
     # Calculate our times:
     time_calc_full(run_time_hrs, run_time_mins, run_time_full)
-#    print(run_time_full)
     session_calc(run_time_full, sesh_list)
-#    print(sesh_list)
+    session_sum = calc_sesh_sum(sesh_list)
+    session_average = calc_sesh_average(sesh_list)
 
     # And now we output our output
-    output(run_time_full, sesh_list)
+    output(run_time_full, sesh_list, session_sum, session_average)
     exit_message()
 
 
@@ -90,9 +106,9 @@ def greeting():
     This function displays a greeting
     :return: nothing
     """
-    print("\nHello! This program calculates a session length of a program"
-          "after asking for \n the run times of program at the the beginning"
-          " and end of a session.")
+    print("\nHello! This program calculates a session lengths of a program"
+          "after asking for \nthe run times of program at the beginning"
+          " of each session.")
 
 
 def proceed():
@@ -102,7 +118,7 @@ def proceed():
     :return: cont, a char, represents user's choice
     """
     cont = ""
-    cont = v.get_y_or_n("\nDo you want to enter another session? (y/n): ")
+    cont = v.get_y_or_n("\nDo you have another run time to enter? (y/n): ")
     return cont
 
 
@@ -115,12 +131,11 @@ def get_runtime_hrs(run_time_hrs):
     run_hrs = 0
     # We don't want to append anything to the list until we've validated the
     # input, hence this variable.
-    run_hrs = v.get_integer("\nPlease enter the total program run time in hours"
-                            ": \n(whole numbers only): ")
+    prompt = "\nPlease enter the total run time of the program in hours: "
+    run_hrs = v.get_integer(prompt)
     if run_hrs < 0:
         print("The run time cannot be negative.")
-        run_hrs = v.get_integer("\nPlease enter the total program run in hours"
-                                "\n(whole numbers only): ")
+        run_hrs = v.get_integer(prompt)
     else:
         run_time_hrs.append(run_hrs)
     return 0
@@ -133,18 +148,14 @@ def get_runtime_mins(run_time_mins):
     :returns: nothing
     """
     run_mins = 0
-    run_mins = v.get_integer("\nPlease enter the total program run time in "
-                             "minutes \n(whole numbers only): ")
+    prompt = "\nNow please enter the minutes portion of the run time: "
+    run_mins = v.get_integer(prompt)
     if run_mins < 0:
         print("The run time cannot be negative.")
-        run_hrs = v.get_integer("\nPlease enter the total program run in "
-                                "minutes \n(whole numbers only): ")
+        run_hrs = v.get_integer(prompt)
     else:
         run_mins = run_mins / 60
-        run_mins = round(run_mins, 2)
-        # This gives us the minute format in decimal form, then rounds it down
-        # to two decimals
-        # Second step may be unnecessary if I can get the output formatting right
+        # This gives us the minute format in decimal form
         run_time_mins.append(run_mins)
     return 0
 
@@ -158,7 +169,9 @@ def time_calc_full(run_time_hrs, run_time_mins, run_time_full):
     :return: nothing
     """
     for i in range(len(run_time_hrs)):
-        total_time = run_time_hrs[i] + run_time_mins[i]
+        total_time = abs(run_time_hrs[i] + run_time_mins[i])
+        # Convert the result into an absolute value to accounting for
+        # backwards session times entered
         run_time_full.append(total_time)
 
     return 0
@@ -181,11 +194,39 @@ def session_calc(run_time_full, sesh_list):
             sesh_list.append(sesh_time)
 
 
-def output(run_time_full, sesh_list):
+def calc_sesh_sum(a_list):
+    """
+    Sums the values in a list
+    :param a_list: a list of values
+    :return total_sum: the sum of the values
+    """
+    total_sum = 0.0
+    for index in range(len(a_list)):
+        # we need to check if the items in the list are ints and/or floats
+        if type(a_list[index]) is int or type(a_list[index]) is float:
+            total_sum = total_sum + a_list[index]
+    return total_sum
+
+
+def calc_sesh_average(a_list):
+    """
+    Calculates the average of the items in a list
+    :param a_list: a list of values
+    :return: the average of the list items
+    """
+    average = 0.0
+    avg_sum = calc_sesh_sum(a_list)
+    average = avg_sum / len(a_list)
+    return average
+
+
+def output(run_time_full, sesh_list, sesh_sum, sesh_average):
     """
     Outputs the results to the user
     :param run_time_full: a list of the run times
     :param sesh_list: a list of the session times
+    :param sesh_sum: the sum of all the session times
+    :param sesh_average: the average of the session times
     :return: nothing
     """
     # I learned how the format string function works with practice 8, so
@@ -196,6 +237,9 @@ def output(run_time_full, sesh_list):
     for i in range(len(run_time_full)):
         print("{: <20}{: <10}".format("{:.2f}".format(run_time_full[i]),
                                       "{:.2f}".format(sesh_list[i])))
+    print("The sum of all session lengths is {:.2f}".format(sesh_sum))
+    print("The average of all session lengths is "
+          "{:.2f}".format(sesh_average))
 
 
 def exit_message():
@@ -210,13 +254,7 @@ def exit_message():
 if __name__ == "__main__":
     main()
 
-# Future planning (distant future for some of these)
-# Allow entering multiple session times
-#   Knowledge required: lists? Can lists be of an indefinite size?
-#
-# Fancy output only gets displayed if the user asks for it
-#   Have the knowledge for this, but no need for it atm.
-#   Could do it anyway.
+
 # Read session times from a file
 # Running average of session times
 # Highlight outliers, 0 values
