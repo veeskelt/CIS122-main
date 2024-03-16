@@ -7,19 +7,67 @@
 #   and output the session time in hours and minutes (rounded).
 # Input: session time in hours, session time in minutes, continue option
 # Output: session end times, session run times
-# Sources: Lab 9 specifications, previous labs
+# Sources: Lab 9 specifications, previous labs, this thread on accessing the
+# last item in a list:
+# https://stackoverflow.com/questions/930397/how-do-i-get-the-last-element-of-a-list
 #
 # *****************************************************************************
-# pseudocode
-# Intro message
-# Note on the expected input format
-# Get the first run time from the user
-#   Need to check of the list of class objects is empty
-#       does if(len(session_times)) == 0) work? -Yes
-#   if so, session_time 1 is equal to end_time_full (end_time_hr + (end_time_mins/60))
-#   If not, it's end_time_full - session_time[i] or something
-# Loop the above until the user is done entering times - standard 3 option menu
-# Once done, sum session times, average them, print
+# Hello! This program calculates the session lengths of a program after asking
+# for the run times of program at the beginning of each session.
+#
+# Note: when the program asks for the run time in hours, it is referring to the
+# hours portion of the run time; if a program was run for 3 hours and 28
+# minutes, you would enter 3. Likewise, when it asks for the minutes portion,
+# you would enter 28. Any decimal places entered will be ignored.
+#
+# Please enter the total run time of the program in hours: 1
+#
+# Now please enter the minutes portion of the run time: 18
+# If you have any notes for this entry, enter them now, otherwise press enter:
+# Length: 1.30, Note: <no user notes>
+#
+# Do you have another run time to enter? (y/n): y
+#
+# Please enter the total run time of the program in hours: 1
+#
+# Now please enter the minutes portion of the run time: 36
+# If you have any notes for this entry, enter them now, otherwise press enter:
+# job crashed
+# Length: 1.30, Note: <no user notes>
+# Length: 0.30, Note: job crashed
+#
+# Do you have another run time to enter? (y/n): y
+#
+# Please enter the total run time of the program in hours: 2
+#
+# Now please enter the minutes portion of the run time: 48
+# If you have any notes for this entry, enter them now, otherwise press enter:
+# successful run
+# Length: 1.30, Note: <no user notes>
+# Length: 0.30, Note: job crashed
+# Length: 1.20, Note: successful run
+#
+# Do you have another run time to enter? (y/n): y
+#
+# Please enter the total run time of the program in hours: 3
+#
+# Now please enter the minutes portion of the run time: 54
+# If you have any notes for this entry, enter them now, otherwise press enter:
+# bad output, reconfigure settings
+# Length: 1.30, Note: <no user notes>
+# Length: 0.30, Note: job crashed
+# Length: 1.20, Note: successful run
+# Length: 1.10, Note: bad output, reconfigure settings
+#
+# Do you have another run time to enter? (y/n): n
+# Cumulative results:
+# Index  Total Time      Session Time    Notes
+# 1.     1.3 hours          1.3 hours
+# 2.     1.6 hours          0.3 hours    job crashed
+# 3.     2.8 hours          1.2 hours    successful run
+# 4.     3.9 hours          1.1 hours    bad output, reconfigure settings
+# Average Session Length: 0.97 hours
+
 
 import valid as v
 
@@ -66,28 +114,55 @@ def main():
     session_time = 0.0
     session_sum = 0.0
     session_average = 0.0
-    cont = "y"
+    choice = 0
+    target = 0
     greeting()
     print_input_note()
-    while cont == 'y':
-        run_time_hrs = get_runtime_hrs()
-        #        print(run_time_hrs)
-        run_time_mins = get_runtime_mins()
-        #        print(run_time_mins)
-        run_time_full = time_calc_full(run_time_hrs, run_time_mins)
-        #        print(run_time_full)
-        times_list.append(run_time_full)
-        #        print(times_list)
-        #        note = get_note()
-        session_time = session_calc(run_time_full, sesh_list, times_list)
-        #        print(session_time)
-        added_note = get_note()
-        sesh_list.append(Session(session_time, added_note))
-        for i in range(len(sesh_list)):
-            print(sesh_list[i])
-        cont = proceed()
-    session_average = calc_sesh_average(sesh_list)
-    output(times_list, sesh_list, session_average)
+    show_menu()
+    choice = get_choice()
+    while choice != 5:
+        if choice == 1:
+            # Get times and calculate full time
+            run_time_hrs = get_runtime_hrs()
+            run_time_mins = get_runtime_mins()
+            run_time_full = time_calc_full(run_time_hrs, run_time_mins)
+            # Add this to the list of runtimes
+            times_list.append(run_time_full)
+            # Calculate the session time, get the user note, and create a Session
+            # object from the data
+            session_time = session_calc(run_time_full, sesh_list, times_list)
+            added_note = user_note()
+            sesh_list.append(Session(session_time, added_note))
+            show_menu()
+            choice = get_choice()
+
+        elif choice == 2:
+            # Change a note
+            if len(sesh_list) == 0:
+                print("\nThere are no entries to modify.")
+            else:
+                target = change_which_note(sesh_list)
+                new_note = user_note()
+                sesh_list[target].set_note(new_note)
+            show_menu()
+            choice = get_choice()
+
+        elif choice == 3:
+            # Output the list
+            if len(sesh_list) == 0:
+                print("\n There is no data to display.")
+            else:
+                session_average = calc_sesh_average(sesh_list)
+                output(times_list, sesh_list, session_average)
+            show_menu()
+            choice = get_choice()
+
+        elif choice == 4:
+            sesh_list = []  # This should clear the list
+            show_menu()
+            choice = get_choice()
+
+    # Once the loop is done, calculate the average and return it
 
 
 def get_runtime_hrs():
@@ -114,8 +189,8 @@ def get_runtime_mins():
     run_mins = 0
     prompt = "\nNow please enter the minutes portion of the run time: "
     run_mins = v.get_integer(prompt)
-    while run_mins < 0:
-        print("The run time cannot be negative.")
+    if run_mins < 0 or run_mins > 59:
+        print("The run time cannot be negative or above 59.")
         run_hrs = v.get_integer(prompt)
     run_mins = run_mins / 60
     # This gives us the minute format in decimal form
@@ -154,14 +229,14 @@ def session_calc(time_full, sesh_list, times_list):
     return session_length
 
 
-def get_note():
+def user_note():
     """
     This gets a string from the user and returns it.
     :return: note, the user-input string.
     """
     note = ""
     note = input("If you have any notes for this entry, please enter them, "
-                 "otherwise press enter: ")
+                 "otherwise press enter: \n")
     return note
 
 
@@ -170,7 +245,7 @@ def calc_sesh_sum(sesh_list):
     Calculates the sum of all session times. Mainly used for calculating the
     average.
     :param sesh_list: a list of the session times
-    :return:
+    :return sesh_sum: the sum of the session times
     """
     sesh_sum = 0.0
     for i in range(len(sesh_list)):
@@ -183,7 +258,7 @@ def calc_sesh_average(sesh_list):
     """
     Calculates the average time of all the sessions
     :param sesh_list: the list of sessions
-    :return:
+    :return average: the average of all sessions
     """
     average = 0.0
     average = calc_sesh_sum(sesh_list) / len(sesh_list)
@@ -193,22 +268,71 @@ def calc_sesh_average(sesh_list):
 def output(times, sesh_list, average):
     """
     Prints the result of all calculations
-    :param times:
-    :param sesh_list:
-    :param average:
-    :return:
+    :param times: a list of runtimes
+    :param sesh_list: a list of "Session" objects
+    :param average: the average of all session times
+    :return: nothing
     """
     full_times = ""
     sesh_times = ""
+    index = ""
     print("Cumulative results:")
-    print("{:<15} {:<13} {}".format("Total Time", "Session Time", "Notes"))
+    print("{:<7}{:>10} {:>17} {}".format("Index", "Total Time", "Session Time",
+                                         "   Notes"))
     for i in range(len(sesh_list)):
         full_times = (str(round(times[i], 2)) + " hours")
         sesh_times = (str(round(sesh_list[i].get_length(), 2)) + " hours")
-        print("{:<3}{:>10} {:>17} {}".format(i + 1, full_times, sesh_times,
-                                             sesh_list[i].get_note()))
+        index = (str(i + 1) + ".")
+        note = ("   " + sesh_list[i].get_note())
+        print("{:<6} {:>9} {:>18} {}".format(index, full_times, sesh_times,
+                                             note))
 
     print("Average Session Length: {:.2f} hours".format(average))
+
+
+def show_menu():
+    """
+    This function prints a menu to give the user the choice of clearing the
+    times list, adding a new entry, or modifying an entry's note.
+    :return: none, decorative function
+    """
+    print("\n1. Add a new entry")
+    print("2. Modify an existing entry's note")
+    print("3. Show all entries in the list")
+    print("4. Clear all entries")
+    print("5. Exit")
+
+
+def get_choice():
+    """
+    This function gets the menu choice from the user.
+    :return choice: the
+    """
+    choice = 0
+    choice = v.get_integer("\n Enter your selection (1-5): ")
+    while choice < 0 or choice > 5:
+        print("Invalid selection.")
+        choice = v.get_integer("\n Enter your selection (1-5): ")
+    return choice
+
+
+def change_which_note(sesh_list):
+    """
+    This function gets the list of notes for the user and returns it.
+    :param sesh_list: list of sessions, used for showing the range of valid
+     inputs
+    :return changed_note: chosen entry to modify
+    """
+    changed_note = ""
+    prompt = ("Which of the", str(len(sesh_list)), " notes would you like to "
+                                                   "change: \n")
+    changed_note = v.get_integer(prompt)
+    while changed_note < 0 or changed_note > len(sesh_list):
+        print("Invalid choice.")
+        changed_note = v.get_integer(prompt)
+    changed_note = changed_note - 1  # Because this'll be an index position,
+    # gotta subtract one from it b/c list entries start at position 0 and not 1
+    return changed_note
 
 
 def greeting():
@@ -216,8 +340,8 @@ def greeting():
     This function displays a greeting
     :return: nothing
     """
-    print("\nHello! This program calculates a session lengths of a program"
-          "after asking for \nthe run times of program at the beginning"
+    print("\nHello! This program calculates the session lengths of a program"
+          " after asking \nfor the run times of program at the beginning"
           " of each session.")
 
 
@@ -229,9 +353,9 @@ def print_input_note():
     """
     print("\nNote: when the program asks for the run time in hours, it is "
           "referring to the \nhours portion of the run time; if a program "
-          "was run for 3 hours and 28 minutes, \nyou would enter 3. "
-          "Likewise, when it asks for the minutes portion, you would "
-          "\nenter 28. Any decimal places entered will be ignored.")
+          "was run for 3 hours and 28 \nminutes, you would enter 3. "
+          "Likewise, when it asks for the minutes portion, \nyou would "
+          "enter 28. Any decimal places entered will be ignored.")
 
 
 def proceed():
@@ -250,8 +374,12 @@ if __name__ == "__main__":
 
 # Future plans
 #   Read session times from a file
-#   Running average of session times
 #   Highlight outliers, 0 values
-#       Possibly add notes to these outliers and 0 values
+#       This requires knowing how to sort
 #   Version that hooks into steam API for game runtimes???
 #   Does blender have something similar I can hook into?
+#   Reconfigure the program to take session times and calculate total run times
+#   ^^^ That's far more useful of a practical application, for say, rendering
+#   video files or ripping bluray discs or rendering something in blender.
+#       Can't do it now because I need to turn this in and I have a math final
+#       to study for.
