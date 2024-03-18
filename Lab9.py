@@ -95,9 +95,11 @@ class Session:
     def __str__(self):
         printed_string = ""
         if len(self.__note) == 0:
-            printed_string = "Length: {:.2f}, Note: {}".format(self.__length, "<no user notes>")
+            printed_string = "Length: {:.2f}, Note: {}".format(self.__length,
+                                                               "<no user notes>")
         else:
-            printed_string = "Length: {:.2f}, Note: {}".format(self.__length, self.__note)
+            printed_string = "Length: {:.2f}, Note: {}".format(self.__length,
+                                                               self.__note)
         return printed_string
 
 
@@ -133,6 +135,8 @@ def main():
             session_time = session_calc(run_time_full, sesh_list, times_list)
             added_note = user_note()
             sesh_list.append(Session(session_time, added_note))
+            for i in range(len(sesh_list)):
+                print(i + 1, ". ", sesh_list[i], sep="")
             show_menu()
             choice = get_choice()
 
@@ -158,11 +162,9 @@ def main():
             choice = get_choice()
 
         elif choice == 4:
-            sesh_list = []  # This should clear the list
+            sesh_list = []  # This clears the list
             show_menu()
             choice = get_choice()
-
-    # Once the loop is done, calculate the average and return it
 
 
 def get_runtime_hrs():
